@@ -17,6 +17,8 @@ namespace ResourceServer.IntegrationTests.Extensions
             var client = factory.WithAuthentication(claims)
                 .CreateClient();
 
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(MockAuthenticationHandler.AuthenticationScheme);
+
             return client;
         }
 

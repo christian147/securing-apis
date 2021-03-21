@@ -7,6 +7,11 @@ namespace ResourceServer.IntegrationTests.Mocks
     {
         public static IServiceCollection AddMockAuthentication(this IServiceCollection services)
         {
+            services
+                .AddAuthentication(MockAuthenticationHandler.AuthenticationScheme)
+                .AddScheme<AuthenticationSchemeOptions, MockAuthenticationHandler>(
+                    MockAuthenticationHandler.AuthenticationScheme, o => { });
+
             return services;
         }
     }

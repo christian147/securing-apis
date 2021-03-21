@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ResourceServer.IntegrationTests.Mocks;
 
 namespace ResourceServer.IntegrationTests
 {
@@ -16,6 +17,9 @@ namespace ResourceServer.IntegrationTests
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddHttpContextAccessor()
+                .AddMockAuthentication()
+                .AddMockAuthorization()
                 .AddControllers();
         }
 
@@ -23,6 +27,8 @@ namespace ResourceServer.IntegrationTests
         {
             app
                 .UseRouting()
+                .UseAuthentication()
+                .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
