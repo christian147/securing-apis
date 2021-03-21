@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">Options</div>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary mr-2" (click)="logout()">Logout</button>
+        <button type="button" class="btn btn-primary" (click)="renewToken()">Renew Token</button>
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary mr-2" (click)="callAuthorized()">Call Authorized</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="callAdministrator()">Call Administrator</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="callUser()">Call User</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="callSendEmail()">Send Email</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="callOlderThan18()">Call Older Than18</button>
+        <button type="button" class="btn btn-primary" (click)="callMigrator()">Call Migrator</button>
+    </div>
+    <div class="card-footer text-muted" *ngIf="apiResponse">
+        <span><b>Api response:</b> {{ apiResponse }}</span>
+      </div>
+  </div>
