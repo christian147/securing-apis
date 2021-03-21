@@ -20,6 +20,7 @@ namespace ResourceServer.Extensions
                     options.Authority = configuration["Authority"];
                     options.RequireHttpsMetadata = !environment.IsDevelopment();
                     options.Audience = configuration["Audience"];
+                    options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         RoleClaimType = JwtClaimTypes.Role,
