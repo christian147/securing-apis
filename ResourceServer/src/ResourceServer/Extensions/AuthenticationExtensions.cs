@@ -1,10 +1,9 @@
-﻿using IdentityModel;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System;
+using IdentityModel;
+using IdentityModel.AspNetCore.OAuth2Introspection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 
 namespace ResourceServer.Extensions
 {
@@ -14,18 +13,17 @@ namespace ResourceServer.Extensions
             IConfiguration configuration, IWebHostEnvironment environment)
         {
             services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                .AddAuthentication(OAuth2IntrospectionDefaults.AuthenticationScheme)
+                .AddOAuth2Introspection(options =>
                 {
                     options.Authority = configuration["Authority"];
-                    options.RequireHttpsMetadata = !environment.IsDevelopment();
-                    options.Audience = configuration["Audience"];
+                    options.ClientId = configuration["Audience"];
+                    options.ClientSecret = configuration["ClientSecret"];
                     options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        RoleClaimType = JwtClaimTypes.Role,
-                        NameClaimType = JwtClaimTypes.Name
-                    };
+                    options.EnableCaching = true;
+                    options.CacheDuration = new TimeSpan(0, 0, 10);
+                    options.RoleClaimType = JwtClaimTypes.Role;
+                    options.NameClaimType = JwtClaimTypes.Name;
                 });
 
             return services;

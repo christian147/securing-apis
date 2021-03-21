@@ -1,5 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,8 +19,6 @@ namespace ResourceServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
             services
                 .AddHttpContextAccessor()
                 .AddCors(options =>
@@ -38,6 +35,10 @@ namespace ResourceServer
                 .AddCustomAuthentication(Configuration, Environment)
                 .AddCustomAuthorization(Configuration)
                 .AddControllers();
+
+
+            // introspection endpoint caché
+            services.AddDistributedMemoryCache();
         }
 
         public void Configure(IApplicationBuilder app)
