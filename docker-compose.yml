@@ -1,0 +1,23 @@
+version: '3.4'
+   
+services:
+  identityserver:
+    build:
+      context: .
+      dockerfile: IdentityServer/Dockerfile
+      args:
+        BuildConfiguration: ${BuildConfiguration:?err}
+        IdentityServerPort: ${IdentityServerPort:?err}
+    ports:
+      - "${IdentityServerPort}:${IdentityServerPort}"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-default}
+      - ASPNETCORE_URLS=http://+:${IdentityServerPort}
+  client:
+    build: 
+      context: .
+      dockerfile: Client/Dockerfile
+    ports:
+      - "${ClientPort}:4200"
+    depends_on:
+      - identityserver
