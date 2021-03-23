@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using ResourceServer.IntegrationTests.Mocks;
 using ResourceServer.IntegrationTests.Provider;
 
 namespace ResourceServer.IntegrationTests.Extensions
@@ -21,7 +22,7 @@ namespace ResourceServer.IntegrationTests.Extensions
                 });
             }).CreateClient();
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(string.Empty);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(MockAuthenticationHandler.AuthenticationScheme);
 
             return client;
         }
