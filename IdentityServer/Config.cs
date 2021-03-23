@@ -27,8 +27,8 @@ namespace IdentityServer
                 {
                     ClientId = "client.codepcke",
                     ClientName = "Code + PKCE",
-                    AccessTokenType = AccessTokenType.Jwt,
-                    //AccessTokenType = AccessTokenType.Reference,
+                    //AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenType = AccessTokenType.Reference,
                     RequireClientSecret = false,
                     AllowedCorsOrigins = { "http://localhost:4200" },
                     PostLogoutRedirectUris = { "http://localhost:4200/login" },
