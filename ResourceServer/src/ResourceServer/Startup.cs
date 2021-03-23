@@ -53,6 +53,7 @@ namespace ResourceServer
                          RoleClaimType = JwtClaimTypes.Role,
                          NameClaimType = JwtClaimTypes.Name
                      };
+                     options.SaveToken = true;
                  });
 
             services.AddSingleton<IAuthorizationHandler, ApiKeyRequirementHandler>();
