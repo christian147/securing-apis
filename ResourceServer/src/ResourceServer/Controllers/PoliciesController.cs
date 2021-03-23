@@ -18,9 +18,6 @@ namespace ResourceServer.Controllers
         [HttpGet("send-email")]
         public ApiResponse SendEmail() => new() { Message = "You has sent an email!" };
 
-        [HttpGet("older-than-18")]
-        public ApiResponse IsOlderThan18() => new() { Message = "You are older than 18!" };
-
         [HttpGet("migrator")]
         public ApiResponse Migrate() => new() { Message = "The migration is done!" };
 
