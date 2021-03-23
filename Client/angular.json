@@ -1,0 +1,87 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "client": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "baseHref": "/",
+            "outputPath": "dist/client",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "silent-renew-oidc.html",
+                "input": "src/assets",
+                "output": "/"
+              },
+              {
+                "glob": "oidc-client.min.js",
+                "input": "node_modules/oidc-client/dist",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "src/styles/main.scss"
+            ]
+          },
+          "configurations": {
+            "development": {
+              "aot": true,
+              "watch": true,
+              "optimization": false,
+              "buildOptimizer": false
+            },
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4200
+          },
+          "configurations": {
+            "development": {
+              "browserTarget": "client:build:development"
+            },
+            "production": {
+              "browserTarget": "client:build:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "client"
+}

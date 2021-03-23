@@ -1,0 +1,14 @@
+**/.git
+**/.gitattributes
+**/.gitignore
+**/README.md
+**/Dockerfile*
+**/docker-compose*
+**/.dockerignore
+**/.env
+**/.vs
+**/.vscode
+**/obj
+**/bin
+**/node_modules
+**/Client/dist

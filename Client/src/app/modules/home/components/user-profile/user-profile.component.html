@@ -1,0 +1,51 @@
+<ng-container *ngIf="user">
+  <div class="card">
+    <div class="card-header">
+      Token Response
+      <a class="btn btn-dark ml-2" target="_blank" href="{{ 'https://jwt.io/#debugger-io?token=' + user.id_token }}"> 
+        <img src="https://jwt.io/img/pic_logo.svg" width="15px"/> Id Token
+      </a>
+      <a class="btn btn-dark ml-2" target="_blank" href="{{ 'https://jwt.io/#debugger-io?token=' + user.access_token }}">
+        <img src="https://jwt.io/img/pic_logo.svg" width="15px"/> Access Token
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of user | keyvalue">
+              <td>{{ item.key }}</td>
+              <td>{{ item.value }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Profile</div>
+    <div class="card-body">
+      <table class="table table-sm table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of user.profile | keyvalue">
+            <td>{{ item.key }}</td>
+            <td>{{ item.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
