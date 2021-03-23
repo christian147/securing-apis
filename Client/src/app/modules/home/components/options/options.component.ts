@@ -68,7 +68,7 @@ export class OptionsComponent {
 
   private callApi(endpoint: string): void {
     this.http.get<Response>(endpoint).subscribe(
-      (response: Response) => { this.apiResponse = response.message;},
+      (response: Response) => { this.apiResponse = JSON.stringify(response.message);},
       (error: HttpErrorResponse) => {this.apiResponse = `${error.status} - ${error.statusText}`;}
     );
   }
